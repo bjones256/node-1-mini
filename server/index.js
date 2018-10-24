@@ -1,9 +1,15 @@
 const express = require('express');
-const bodyparser = require('bodyparser');
+const bodyParser = require('body-parser');
+const bc = require('./controllers/books_controller.js')
 
 const app = express();
 
-app.use(bodyparser.json());
+app.use(bodyParser.json());
+
+app.get('/api/books',bc.read)
+app.post('/api/books',bc.create)
+app.put('api/books/:id',bc.update)
+app.put('/api/books/:id',bc.delete)
 
 const port = 4000;
-app.listen(port,function(`server is listening on port: ${port}`))
+app.listen(port,() => { console.log(`server is listening on port: ${port}`); } );
